@@ -46,8 +46,12 @@ namespace WindowsFormsApp1
                 hostBox.ReadOnly = true;
                 portBox.ReadOnly = true;
                 
-                    ThreadPool.QueueUserWorkItem(delegate { new Client(hostBox.Text, Convert.ToInt32(portBox.Text), stream_enable).Start(); });
-              
+                    ThreadPool.QueueUserWorkItem(delegate 
+                    {
+                        new Client(hostBox.Text, Convert.ToInt32(portBox.Text), stream_enable).Start();
+                       // Client.ReadOnly += mainForm.ReadOnlyFalse;
+                    });
+                   
             }
             else
             {
