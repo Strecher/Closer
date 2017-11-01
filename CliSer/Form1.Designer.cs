@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class Form1
+    partial class mainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,20 +28,83 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.hostBox = new System.Windows.Forms.TextBox();
+            this.ipLabel = new System.Windows.Forms.Label();
+            this.portLabel = new System.Windows.Forms.Label();
+            this.portBox = new System.Windows.Forms.TextBox();
+            this.startButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // Form1
+            // hostBox
+            // 
+            this.hostBox.Location = new System.Drawing.Point(12, 34);
+            this.hostBox.Name = "hostBox";
+            this.hostBox.Size = new System.Drawing.Size(100, 20);
+            this.hostBox.TabIndex = 0;
+            this.hostBox.Text = "192.168.0.103";
+            // 
+            // ipLabel
+            // 
+            this.ipLabel.AutoSize = true;
+            this.ipLabel.Location = new System.Drawing.Point(12, 15);
+            this.ipLabel.Name = "ipLabel";
+            this.ipLabel.Size = new System.Drawing.Size(17, 13);
+            this.ipLabel.TabIndex = 1;
+            this.ipLabel.Text = "IP";
+            // 
+            // portLabel
+            // 
+            this.portLabel.AutoSize = true;
+            this.portLabel.Location = new System.Drawing.Point(119, 15);
+            this.portLabel.Name = "portLabel";
+            this.portLabel.Size = new System.Drawing.Size(26, 13);
+            this.portLabel.TabIndex = 2;
+            this.portLabel.Text = "Port";
+            // 
+            // portBox
+            // 
+            this.portBox.Location = new System.Drawing.Point(122, 34);
+            this.portBox.Name = "portBox";
+            this.portBox.Size = new System.Drawing.Size(100, 20);
+            this.portBox.TabIndex = 3;
+            this.portBox.Text = "24432";
+            // 
+            // startButton
+            // 
+            this.startButton.Location = new System.Drawing.Point(228, 34);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(124, 23);
+            this.startButton.TabIndex = 4;
+            this.startButton.Text = "Отправить запрос";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
+            // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(597, 461);
-            this.Name = "Form1";
+            this.Controls.Add(this.startButton);
+            this.Controls.Add(this.portBox);
+            this.Controls.Add(this.portLabel);
+            this.Controls.Add(this.ipLabel);
+            this.Controls.Add(this.hostBox);
+            this.Name = "mainForm";
+            this.ShowInTaskbar = false;
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainForm_FormClosing);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.TextBox hostBox;
+        private System.Windows.Forms.Label ipLabel;
+        private System.Windows.Forms.Label portLabel;
+        private System.Windows.Forms.TextBox portBox;
+        private System.Windows.Forms.Button startButton;
     }
 }
 
