@@ -28,7 +28,7 @@ namespace WindowsFormsApp1
             portBox.ReadOnly = false;
         }
 
-
+        
 
         public mainForm()
         {
@@ -48,10 +48,12 @@ namespace WindowsFormsApp1
                 
                     ThreadPool.QueueUserWorkItem(delegate 
                     {
-                        new Client(hostBox.Text, Convert.ToInt32(portBox.Text), stream_enable).Start();
-                       // Client.ReadOnly += mainForm.ReadOnlyFalse;
+                        var Client = new Client(hostBox.Text, Convert.ToInt32(portBox.Text), stream_enable);
+                        Client.ReadOnlyFalse += ReadOnlyFalse;
+                        Client.Start();
                     });
-                   
+
+
             }
             else
             {

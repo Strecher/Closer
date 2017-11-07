@@ -19,7 +19,7 @@ namespace WindowsFormsApp1
     class Client
     { 
         public delegate void Change();
-        public event Change ReadOnly;
+        public event Change ReadOnlyFalse;
 
         private string host;
         private int port;
@@ -156,7 +156,7 @@ namespace WindowsFormsApp1
                     {
                         MessageBox.Show("Разрыв соединения");
                         stream_enable = !stream_enable;
-                        ReadOnly();
+                        ReadOnlyFalse();
                     }
 
                 }
@@ -165,7 +165,7 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show("Превышено время ожидания");
                 stream_enable = !stream_enable;
-                ReadOnly();
+                ReadOnlyFalse();
             }
         }
     }
