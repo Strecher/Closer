@@ -41,7 +41,7 @@
             this.hostBox.Name = "hostBox";
             this.hostBox.Size = new System.Drawing.Size(100, 20);
             this.hostBox.TabIndex = 0;
-            this.hostBox.Text = "172.28.172.4";
+            this.hostBox.Text = "127.0.0.1";
             // 
             // ipLabel
             // 
