@@ -151,6 +151,7 @@ namespace WindowsFormsApp1
                         binaryWriter.Write(streamArray);
                         //точно, отправялем
                         binaryWriter.Flush();
+                        if (stream_enable == false) break;
                     }
                     catch (IOException e)
                     {

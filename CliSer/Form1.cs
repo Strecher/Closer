@@ -55,12 +55,9 @@ namespace WindowsFormsApp1
 
 
             }
-            else
-            {
                 hostBox.ReadOnly = false;
                 portBox.ReadOnly = false;
                 //остановить поток
-            }
            
         }
 
