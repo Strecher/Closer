@@ -8,3 +8,14 @@ D:\Files\projects\Remote\cliser\CliSer\obj\Debug\CliSer.exe
 D:\Files\projects\Remote\cliser\CliSer\obj\Debug\CliSer.pdb
 D:\Files\projects\Remote\cliser\CliSer\obj\Debug\WindowsFormsApp1.Main.resources
 D:\Files\projects\Remote\cliser\CliSer\obj\Debug\WindowsFormsApp1.ClientForm.resources
+C:\Users\whtl\OneDrive\Documents\Visual Studio 2017\Projects\CliSer\CliSer\bin\Debug\CliSer.exe.config
+C:\Users\whtl\OneDrive\Documents\Visual Studio 2017\Projects\CliSer\CliSer\bin\Debug\CliSer.exe
+C:\Users\whtl\OneDrive\Documents\Visual Studio 2017\Projects\CliSer\CliSer\bin\Debug\CliSer.pdb
+C:\Users\whtl\OneDrive\Documents\Visual Studio 2017\Projects\CliSer\CliSer\obj\Debug\CliSer.csprojResolveAssemblyReference.cache
+C:\Users\whtl\OneDrive\Documents\Visual Studio 2017\Projects\CliSer\CliSer\obj\Debug\WindowsFormsApp1.ClientForm.resources
+C:\Users\whtl\OneDrive\Documents\Visual Studio 2017\Projects\CliSer\CliSer\obj\Debug\WindowsFormsApp1.Main.resources
+C:\Users\whtl\OneDrive\Documents\Visual Studio 2017\Projects\CliSer\CliSer\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\whtl\OneDrive\Documents\Visual Studio 2017\Projects\CliSer\CliSer\obj\Debug\CliSer.csproj.GenerateResource.Cache
+C:\Users\whtl\OneDrive\Documents\Visual Studio 2017\Projects\CliSer\CliSer\obj\Debug\CliSer.csproj.CoreCompileInputs.cache
+C:\Users\whtl\OneDrive\Documents\Visual Studio 2017\Projects\CliSer\CliSer\obj\Debug\CliSer.exe
+C:\Users\whtl\OneDrive\Documents\Visual Studio 2017\Projects\CliSer\CliSer\obj\Debug\CliSer.pdb
