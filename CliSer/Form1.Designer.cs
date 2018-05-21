@@ -71,7 +71,7 @@
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(228, 34);
+            this.startButton.Location = new System.Drawing.Point(98, 60);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(124, 23);
             this.startButton.TabIndex = 4;
@@ -83,7 +83,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(597, 461);
+            this.ClientSize = new System.Drawing.Size(244, 101);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.portBox);
             this.Controls.Add(this.portLabel);
@@ -91,7 +91,7 @@
             this.Controls.Add(this.hostBox);
             this.Name = "mainForm";
             this.ShowInTaskbar = false;
-            this.Text = "Form1";
+            this.Text = "Access";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
