@@ -20,7 +20,7 @@ namespace WindowsFormsApp1
     {
         // сначала идёт передача сигнала для включения потока TCP на клиенте
         //(заключено в метод Старт, возможно, следует сделать отдельный метод)
-        public void Start(string host = "localhost", int port = 24432)
+        public void Signal(string host = "localhost", int port = 24432)
         {
             //порт и хост сигнала равны для теста на локалке. иначе нужно приравнять к порту и хосту этого компьютера
             var signal_host = Encoding.UTF8.GetBytes(host);
@@ -53,8 +53,29 @@ namespace WindowsFormsApp1
 
 
 
+    public IEnumerable<Image> GetScreenshots(int port = 24432)
+            {
+                var list = new TcpListener(port);
+                list.Start();
 
-        
+                using (var tcp = list.AcceptTcpClient())//принимаем конект
+                using (var stream = tcp.GetStream())//создаем сетевой поток
+                using (var br = new BinaryReader(stream)) //создаем BinaryReader
+                    while (true)//делаем бесконечно
+                    {
+                        //принимаем длину 
+                        int len = br.ReadInt32();
+                        //принимаем массив
+                        byte[] arr = br.ReadBytes(len);
+                        using (var ms = new MemoryStream(arr))//создаем временный поток для сжатого изображения
+                        {
+                            //создаем изображение
+                            yield return Bitmap.FromStream(ms);
+                        }
+                        
+                    }
+            }
+   /*     
                 public IEnumerable<Image> GetScreenshots(int port = 24432)
                 {
                     var list = new TcpListener(port);
@@ -77,10 +98,11 @@ namespace WindowsFormsApp1
 
                         }
                 }
-
+    */
                 
-
-/*   public IEnumerable<Chunk> GetScreenshots(int port = 24432)
+/*
+ //UDP приём скринов
+  public IEnumerable<Chunk> GetScreenshots(int port = 24432)
  {
      using (var udp = new UdpClient(port))
 
@@ -111,7 +133,7 @@ public class Chunk
  public Point Position;
  public Image Image;
 }
-}
+
 
 
 
