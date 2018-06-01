@@ -24,11 +24,11 @@ namespace WindowsFormsApp1
             InitializeComponent();
 
             //создаем Image для отображения скриншота и Graphics для него
-            var image = new Bitmap(1300, 1300);
-            var gr = Graphics.FromImage(image);
+            var screenshotBitmap = new Bitmap(1300, 1300);
+            var screenshot = Graphics.FromImage(screenshotBitmap);
 
             //создаем PictureBox для отображения скриншотов
-            var pb = new PictureBox { Parent = this, Dock = DockStyle.Fill, SizeMode = PictureBoxSizeMode.Zoom, Image = image };
+            var screenshotZone = new PictureBox { Parent = this, Dock = DockStyle.Fill, SizeMode = PictureBoxSizeMode.Zoom, Image = screenshotBitmap };
 
             //создаем поток для клиента (на самом деле это должно запускаться на машине клиента, но для теста, клиент запускается здесь)
             ThreadPool.QueueUserWorkItem(delegate { new Client("localhost", 24432).Start(); });
@@ -42,9 +42,9 @@ namespace WindowsFormsApp1
                 {
                    
                     //уничтожаем предыдущее изображение
-                    if (pb.Image != null) pb.Image.Dispose();
+                    if (screenshotZone.Image != null) screenshotZone.Image.Dispose();
                     //заносим скриншот в PictureBox
-                    pb.Image = chunk;
+                    screenshotZone.Image = chunk;
                 
                     /* //заносим скриншот в PictureBox для чанков
                      gr.DrawImage(chunk.Image, chunk.Position);
