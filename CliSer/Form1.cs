@@ -40,9 +40,16 @@ namespace WindowsFormsApp1
                 //получаем в цикле скриншоты с клиента
                 foreach (var chunk in new Server().GetScreenshots())
                 {
+                   
+                    //уничтожаем предыдущее изображение
+                    if (pb.Image != null) pb.Image.Dispose();
                     //заносим скриншот в PictureBox
-                    gr.DrawImage(chunk.Image, chunk.Position);
-                    pb.Invalidate();
+                    pb.Image = chunk;
+                
+                    /* //заносим скриншот в PictureBox для чанков
+                     gr.DrawImage(chunk.Image, chunk.Position);
+                      pb.Invalidate();
+                      */
                 }
             });
         }

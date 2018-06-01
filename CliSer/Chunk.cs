@@ -12,8 +12,11 @@ using System.Net.Sockets;
 using System.IO;
 using System.Threading;
 
-public class Chunk
+namespace WindowsFormsApp1
 {
-    public Point Position;
-    public Image Image;
+    public class Chunk
+    {
+        public Point Position;
+        public Image Image;
+    }
 }
