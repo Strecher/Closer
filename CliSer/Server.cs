@@ -18,10 +18,12 @@ namespace WindowsFormsApp1
     //TCP
     public class Server
     {
+        // сначала идёт передача сигнала для включения потока TCP на клиенте
+        //(заключено в метод Старт, возможно, следует сделать отдельный метод)
         public void Start(string host = "localhost", int port = 24432)
         {
             //порт и хост сигнала равны для теста на локалке. иначе нужно приравнять к порту и хосту этого компьютера
-            var signal_host = Encoding.UTF8.GetBytes(host); 
+            var signal_host = Encoding.UTF8.GetBytes(host);
             var signal_port = Encoding.UTF8.GetBytes(port.ToString());
 
             //коннектимся к клиенту, отправляем сигнал для включения TCP-лучей в нашу сторону
@@ -31,10 +33,10 @@ namespace WindowsFormsApp1
                     using (var memoryStream = new MemoryStream())  //создаем временный поток для айпи
                     {
                         //отправляем айпи этого компьютера
-                       // memoryStream.WriteByte((byte)(signal_host));
-                       // memoryStream.WriteByte((byte)(signal_port));
+                        // memoryStream.WriteByte((byte)(signal_host));
+                        // memoryStream.WriteByte((byte)(signal_port));
                         //получаем массив байт
-                       // byte[] streamArray = memoryStream.ToArray();
+                        // byte[] streamArray = memoryStream.ToArray();
                         udpSignal.Send(signal_host, signal_host.Length);//отправляем host
                         Thread.Sleep(10);//если убрать эту задержку, то не все UDP пакеты приходит, почему - хз
                         udpSignal.Send(signal_port, signal_port.Length);//отправляем host
@@ -44,13 +46,15 @@ namespace WindowsFormsApp1
 
         }
 
+    }
 
 
 
 
 
 
-        /*
+
+        
                 public IEnumerable<Image> GetScreenshots(int port = 24432)
                 {
                     var list = new TcpListener(port);
@@ -74,38 +78,39 @@ namespace WindowsFormsApp1
                         }
                 }
 
-                */
+                
 
-        public IEnumerable<Chunk> GetScreenshots(int port = 24432)
-        {
-            using (var udp = new UdpClient(port))
+/*   public IEnumerable<Chunk> GetScreenshots(int port = 24432)
+ {
+     using (var udp = new UdpClient(port))
 
-                while (true)//делаем бесконечно
-                {
-                    //принимаем массив
-                    IPEndPoint ip = null;
-                    var arr = udp.Receive(ref ip);
+         while (true)//делаем бесконечно
+         {
+             //принимаем массив
+             IPEndPoint ip = null;
+             var arr = udp.Receive(ref ip);
 
-                    //читаем координаты
-                    var x = arr[0] * Client.CHUNK_SIZE;
-                    var y = arr[1] * Client.CHUNK_SIZE;
+             //читаем координаты
+             var x = arr[0] * Client.CHUNK_SIZE;
+             var y = arr[1] * Client.CHUNK_SIZE;
 
-                    using (var memoryStream = new MemoryStream(arr, 2, arr.Length - 2))//создаем временный поток для сжатого изображения
-                    {
-                        //создаем изображение
-                        var bitmap = Bitmap.FromStream(memoryStream);
-                        //возвращаем
-                        yield return new Chunk { Position = new Point(x, y), Image = bitmap };
-                    }
-                }
-        }
-    }
+             using (var memoryStream = new MemoryStream(arr, 2, arr.Length - 2))//создаем временный поток для сжатого изображения
+             {
+                 //создаем изображение
+                 var bitmap = Bitmap.FromStream(memoryStream);
+                 //возвращаем
+                 yield return new Chunk { Position = new Point(x, y), Image = bitmap };
+             }
+         }
+ }
+  */
+}
 
-    public class Chunk
-    {
-        public Point Position;
-        public Image Image;
-    }
+public class Chunk
+{
+ public Point Position;
+ public Image Image;
+}
 }
 
 

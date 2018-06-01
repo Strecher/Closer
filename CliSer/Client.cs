@@ -15,9 +15,32 @@ using System.Threading;
 
 namespace WindowsFormsApp1
 {
-      public class Client
+    public class Client
     {
-        /*
+        public delegate void Change();
+        public event Change ReadOnlyFalse;
+
+        private string host;
+        private int port;
+        private bool stream_enable;
+        public const int CHUNK_SIZE = 8;
+
+        //конструктор для случая, когда есть галочка включить/выключить поток
+        public Client(string host, int port, bool stream_enable)
+        {
+            this.host = host;
+            this.port = port;
+            this.stream_enable = stream_enable;
+        }
+
+        //конструктор для случая, когда поток постоянный
+        public Client(string host, int port)
+        {
+            this.host = host;
+            this.port = port;
+        }
+
+        /* //UDP
           public const int CHUNK_SIZE = 2048;
 
           public void Start(string host = "localhost", int port = 24432)
@@ -106,55 +129,59 @@ namespace WindowsFormsApp1
 
                 }*/
 
+        //UDP_сигнал
+
+
+
         //TCP
         public void Start()
-    {
-        //размеры экрана
-        var screenSize = Screen.PrimaryScreen.Bounds;
-        var chunkHash = new Dictionary<Point, int>();
-
-        //конкетимся к серверу, получаем поток
-        try
         {
-            TcpClient tcp = new TcpClient(host, port); //создаем TcpClient
-            var stream = tcp.GetStream(); //получаем сетевой поток
-            var binaryWriter = new BinaryWriter(stream);
-            var bmpScreen = new Bitmap(screenSize.Width, screenSize.Height);
-            var screenshot = Graphics.FromImage(bmpScreen);
-            var memoryStream = new MemoryStream();
-            while (stream_enable == true)
-            {
-                try
-                {
-                    screenshot.CopyFromScreen(screenSize.Left, screenSize.Top, 0, 0, screenSize.Size);
-                    memoryStream.Position = 0;
-                    //конвертируем изображение в массив байт в формате jpeg
-                    bmpScreen.Save(memoryStream, ImageFormat.Jpeg);
-                    byte[] streamArray = memoryStream.ToArray(); //получаем массив байт  
-                                                                 //отправляем длину массива данных
-                    binaryWriter.Write(streamArray.Length);
-                    //отправляем массив
-                    binaryWriter.Write(streamArray);
-                    //точно, отправялем
-                    binaryWriter.Flush();
-                    if (stream_enable == false) break;
-                }
-                catch (IOException e)
-                {
-                    MessageBox.Show("Разрыв соединения");
-                    stream_enable = !stream_enable;
-                    ReadOnlyFalse();
-                }
+            //размеры экрана
+            var screenSize = Screen.PrimaryScreen.Bounds;
+            var chunkHash = new Dictionary<Point, int>();
 
+            //конкетимся к серверу, получаем поток
+            try
+            {
+                TcpClient tcp = new TcpClient(host, port); //создаем TcpClient
+                var stream = tcp.GetStream(); //получаем сетевой поток
+                var binaryWriter = new BinaryWriter(stream);
+                var bmpScreen = new Bitmap(screenSize.Width, screenSize.Height);
+                var screenshot = Graphics.FromImage(bmpScreen);
+                var memoryStream = new MemoryStream();
+                while (stream_enable == true)
+                {
+                    try
+                    {
+                        screenshot.CopyFromScreen(screenSize.Left, screenSize.Top, 0, 0, screenSize.Size);
+                        memoryStream.Position = 0;
+                        //конвертируем изображение в массив байт в формате jpeg
+                        bmpScreen.Save(memoryStream, ImageFormat.Jpeg);
+                        byte[] streamArray = memoryStream.ToArray(); //получаем массив байт  
+                                                                     //отправляем длину массива данных
+                        binaryWriter.Write(streamArray.Length);
+                        //отправляем массив
+                        binaryWriter.Write(streamArray);
+                        //точно, отправялем
+                        binaryWriter.Flush();
+                        if (stream_enable == false) break;
+                    }
+                    catch (IOException e)
+                    {
+                        MessageBox.Show("Разрыв соединения");
+                        stream_enable = !stream_enable;
+                        ReadOnlyFalse();
+                    }
+
+                }
+            }
+            catch (SocketException e)
+            {
+                MessageBox.Show("Превышено время ожидания");
+                stream_enable = !stream_enable;
+                ReadOnlyFalse();
             }
         }
-        catch (SocketException e)
-        {
-            MessageBox.Show("Превышено время ожидания");
-            stream_enable = !stream_enable;
-            ReadOnlyFalse();
-        }
+
     }
-
-
 }

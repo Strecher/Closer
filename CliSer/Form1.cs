@@ -31,7 +31,7 @@ namespace WindowsFormsApp1
             var pb = new PictureBox { Parent = this, Dock = DockStyle.Fill, SizeMode = PictureBoxSizeMode.Zoom, Image = image };
 
             //создаем поток для клиента (на самом деле это должно запускаться на машине клиента, но для теста, клиент запускается здесь)
-            ThreadPool.QueueUserWorkItem(delegate { new Client().Start(); });
+            ThreadPool.QueueUserWorkItem(delegate { new Client("localhost", 24432).Start(); });
 
             //создаем поток для сервера
             ThreadPool.QueueUserWorkItem(
