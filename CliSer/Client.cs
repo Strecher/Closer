@@ -12,6 +12,7 @@ using System.Net.Sockets;
 using System.IO;
 using System.Drawing.Imaging;
 using System.Threading;
+using WindowsFormsApp1;
 
 namespace WindowsFormsApp1
 {
@@ -24,6 +25,7 @@ namespace WindowsFormsApp1
         private int port;
         private bool stream_enable;
         public const int CHUNK_SIZE = 8;
+        
 
         //конструктор для случая, когда есть галочка включить/выключить поток
         public Client(string host, int port, bool stream_enable)
@@ -129,7 +131,29 @@ namespace WindowsFormsApp1
 
                 }*/
 
-        //UDP_сигнал
+        //UDP_приём_сигнала    
+            IEnumerable<SignalReceiver> GetSignal(int port = 24432)
+        {
+            using (var udpReceiveSignal = new UdpClient(port))
+
+                while (true)//делаем бесконечно
+                {
+                    //принимаем массив
+                    IPEndPoint ip = null;
+                    var receivedIpServerBytes = udpReceiveSignal.Receive(ref ip);
+
+                    //читаем айпи компа
+                   // var ipServer = ref ip;
+
+                    using (var memoryStreamReceive = new MemoryStream(receivedIpServerBytes, 2, receivedIpServerBytes.Length - 2))//создаем временный поток для приёма айпи
+                    {
+                        //создаем переменную для входящей айпишки
+                        var receivedIp = Encoding.UTF8.GetString(memoryStreamReceive.GetBuffer());
+                        //возвращаем
+                        yield return new SignalReceiver {};
+                    }
+                }
+        }
 
 
 

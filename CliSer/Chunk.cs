@@ -1,20 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Net;
-using System.Net.Sockets;
-using System.IO;
-using System.Threading;
-
+﻿using System.Drawing;
 namespace WindowsFormsApp1
 {
-    public class Chunk
+    internal class Chunk
     {
         public Point Position;
         public Image Image;

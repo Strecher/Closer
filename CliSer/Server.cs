@@ -21,26 +21,36 @@ namespace WindowsFormsApp1
         // сначала идёт передача сигнала для включения потока TCP на клиенте
         //(заключено в один метод, возможно, следует сделать отдельный метод)
         public void SendSignal(string host = "localhost", int port = 24432)
+
+ 
         {
-            //порт и хост сигнала равны для теста на локалке. иначе нужно приравнять к порту и хосту этого компьютера
+            //отправляемые порт и хост сигнала равны порту и хосту получателя для теста на локалке. иначе отправляемое нужно приравнять к порту и хосту этого компьютера
             var signal_host = Encoding.UTF8.GetBytes(host);
             var signal_port = Encoding.UTF8.GetBytes(port.ToString());
 
+
             //коннектимся к клиенту, отправляем сигнал для включения TCP-лучей в нашу сторону
-            using (var udpSignal = new UdpClient(host, port)) //создаем UdpClient
+            using (var udpSendSignal = new UdpClient(host, port)) //создаем UdpClient
                 while (true)
                 {
-                    using (var memoryStream = new MemoryStream())  //создаем временный поток для айпи
+
+                    using (var memoryStreamSend = new MemoryStream())  //создаем временный поток для айпи
                     {
-                        //отправляем айпи этого компьютера
-                        // memoryStream.WriteByte((byte)(signal_host));
-                        // memoryStream.WriteByte((byte)(signal_port));
-                        //получаем массив байт
-                        // byte[] streamArray = memoryStream.ToArray();
-                        udpSignal.Send(signal_host, signal_host.Length);//отправляем host
+                        /* отправляем айпи этого компьютера
+                         memoryStream.WriteByte((byte)(signal_host));
+                        memoryStream.WriteByte((byte)(signal_port));
+                        получаем массив байт
+                       byte[] streamArray = memoryStream.ToArray();
+                       */
+
+
+                        udpSendSignal.Send(signal_host, signal_host.Length);//отправляем host
                         Thread.Sleep(10);//если убрать эту задержку, то не все UDP пакеты приходит, почему - хз
-                        udpSignal.Send(signal_port, signal_port.Length);//отправляем host
+
+                        /* //порт можно не передавать
+                        udpSendSignal.Send(signal_port, signal_port.Length);//отправляем host
                         Thread.Sleep(10);//если убрать эту задержку, то не все UDP пакеты приходит, почему - хз [2]
+                        */
                     }
                 }
 
@@ -75,6 +85,9 @@ namespace WindowsFormsApp1
 
     }
         
+
+
+
 
     /*     
                  public IEnumerable<Image> GetScreenshots(int port = 24432)
