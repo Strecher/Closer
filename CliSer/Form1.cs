@@ -27,25 +27,51 @@ namespace WindowsFormsApp1
             var screenshotBitmap = new Bitmap(1300, 1300);
             var screenshot = Graphics.FromImage(screenshotBitmap);
 
+            //создаём переменную для получения айпи
+            string receivedIp = "0";
+            hostname.Text = receivedIp;
+
             //создаем PictureBox для отображения скриншотов
             var screenshotZone = new PictureBox { Parent = this, Dock = DockStyle.Fill, SizeMode = PictureBoxSizeMode.Zoom, Image = screenshotBitmap };
 
+            //определяем сервер
+            var Server = new Server();
+
+            //сервер посылает сигнал:
+            Server.SendSignal("localhost",24432);
+
+            //определяем клиент
+            var tempClient = new Client();
+
+            //Клиенту создаем поток для получения сигнала
+            ThreadPool.QueueUserWorkItem(
+            delegate
+            {
+                //Клиент получает сигнал от сервера
+                foreach (var signal in tempClient.GetSignal())
+                {
+                    receivedIp = signal;
+                    hostname.Text = receivedIp;
+                }
+                // сигнал получен и записан!
+            });
+
             //создаем поток для клиента (на самом деле это должно запускаться на машине клиента, но для теста, клиент запускается здесь)
-            ThreadPool.QueueUserWorkItem(delegate { new Client("localhost", 24432).Start(); });
+            ThreadPool.QueueUserWorkItem(delegate { new Client(receivedIp, 24432).Start(); });
 
             //создаем поток для сервера
             ThreadPool.QueueUserWorkItem(
             delegate
             {
                 //получаем в цикле скриншоты с клиента
-                foreach (var chunk in new Server().GetScreenshots())
+                foreach (var chunk in Server.GetScreenshots())
                 {
-                   
+
                     //уничтожаем предыдущее изображение
                     if (screenshotZone.Image != null) screenshotZone.Image.Dispose();
                     //заносим скриншот в PictureBox
                     screenshotZone.Image = chunk;
-                
+
                     /* //заносим скриншот в PictureBox для чанков
                      gr.DrawImage(chunk.Image, chunk.Position);
                       pb.Invalidate();

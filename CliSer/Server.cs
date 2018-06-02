@@ -18,8 +18,7 @@ namespace WindowsFormsApp1
     //TCP
     public class Server
     {
-        // сначала идёт передача сигнала для включения потока TCP на клиенте
-        //(заключено в один метод, возможно, следует сделать отдельный метод)
+        // в методе идёт передача сигнала для включения потока TCP на клиенте
         public void SendSignal(string host = "localhost", int port = 24432)
 
  
@@ -45,7 +44,10 @@ namespace WindowsFormsApp1
 
 
                         udpSendSignal.Send(signal_host, signal_host.Length);//отправляем host
-                        Thread.Sleep(10);//если убрать эту задержку, то не все UDP пакеты приходит, почему - хз
+                        Thread.Sleep(100);//если убрать эту задержку, то не все UDP пакеты приходят из-за высокой скорости отправки.
+
+                        //можно попробовать прервать, если зависнет на двух компьютерах 
+                        break;
 
                         /* //порт можно не передавать
                         udpSendSignal.Send(signal_port, signal_port.Length);//отправляем host

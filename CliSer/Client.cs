@@ -25,7 +25,7 @@ namespace WindowsFormsApp1
         private int port;
         private bool stream_enable;
         public const int CHUNK_SIZE = 8;
-        private string receivedIp;
+        public string receivedIp;
 
 
         //конструктор для случая, когда есть галочка включить/выключить поток
@@ -41,6 +41,12 @@ namespace WindowsFormsApp1
         {
             this.host = host;
             this.port = port;
+        }
+
+        //конструктор для пробы
+        public Client()
+        {
+    
         }
 
         /* //UDP
@@ -132,40 +138,43 @@ namespace WindowsFormsApp1
 
                 }*/
 
+
+
+
         //UDP_приём_сигнала    
+        public IEnumerable<String> GetSignal(int port = 24432)
+        {
+            using (var udpReceiveSignal = new UdpClient(port))
+
+                while (true)//делаем бесконечно
+                {
+                    //принимаем массив
+                    IPEndPoint ip = null;
+                    var receivedIpServerBytes = udpReceiveSignal.Receive(ref ip);
+
+                    //читаем айпи компа
+                    // var ipServer = ref ip;
+
+                    using (var memoryStreamReceive = new MemoryStream(receivedIpServerBytes, 3, receivedIpServerBytes.Length ))//создаем временный поток для приёма айпи
+                    {
+                        //вписываем в переменную входящую айпишку
+                        receivedIp = Encoding.UTF8.GetString(memoryStreamReceive.GetBuffer());
+                       
+                        //возвращаем
+                        yield return receivedIp;
+
+                    }
+                }
+
+        }
 
 
+        //мы получили айпи. далее: старт. отправляем скриншот на айпи!
 
 
         //TCP
         public void Start()
         {
-            IEnumerable<SignalReceiver> GetSignal(int port = 24432)
-            {
-                using (var udpReceiveSignal = new UdpClient(port))
-
-                    while (true)//делаем бесконечно
-                    {
-                        //принимаем массив
-                        IPEndPoint ip = null;
-                        var receivedIpServerBytes = udpReceiveSignal.Receive(ref ip);
-
-                        //читаем айпи компа
-                        // var ipServer = ref ip;
-
-                        using (var memoryStreamReceive = new MemoryStream(receivedIpServerBytes, 2, receivedIpServerBytes.Length - 2))//создаем временный поток для приёма айпи
-                        {
-                            //вписываем в переменную входящую айпишку
-                            receivedIp = Encoding.UTF8.GetString(memoryStreamReceive.GetBuffer());
-                            //возвращаем
-                            yield return new SignalReceiver { };
-
-                            //мы получили айпи. далее: старт. отправляем скриншот на айпи!
-
-
-                        }
-                    }
-            }
 
             //размеры экрана
             var screenSize = Screen.PrimaryScreen.Bounds;
@@ -174,7 +183,7 @@ namespace WindowsFormsApp1
             //конкетимся к серверу, получаем поток
             try
             {
-                TcpClient tcp = new TcpClient(receivedIp, port); //создаем TcpClient
+                TcpClient tcp = new TcpClient(host, port); //создаем TcpClient
                 var stream = tcp.GetStream(); //получаем сетевой поток
                 var binaryWriter = new BinaryWriter(stream);
                 var bmpScreen = new Bitmap(screenSize.Width, screenSize.Height);
