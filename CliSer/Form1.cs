@@ -39,7 +39,7 @@ namespace WindowsFormsApp1
 
             //сервер посылает сигнал:
             Server.SendSignal("192.168.1.12", 24432);
-
+            hostname.Text = "otpravili";
             //определяем клиент
             //var tempClient = new Client();
 
@@ -107,6 +107,11 @@ namespace WindowsFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void hostname_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

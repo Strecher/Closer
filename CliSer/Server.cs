@@ -23,14 +23,15 @@ namespace WindowsFormsApp1
 
  
         {
-            //отправляемые порт и хост сигнала равны порту и хосту получателя для теста на локалке. иначе отправляемое нужно приравнять к порту и хосту этого компьютера
-            var signal_host = Encoding.UTF8.GetBytes(host);
+            //отправляемые свой порт и хост 
+            var signal_host = Encoding.UTF8.GetBytes("192.168.1.98");
             var signal_port = Encoding.UTF8.GetBytes(port.ToString());
 
-
+            int k = 0;
             //коннектимся к клиенту, отправляем сигнал для включения TCP-лучей в нашу сторону
-            using (var udpSendSignal = new UdpClient(host, port)) //создаем UdpClient
-                while (true)
+            using (var udpSendSignal = new UdpClient("192.168.1.12", port)) //создаем UdpClient
+               
+                while (k < 100)
                 {
 
                     using (var memoryStreamSend = new MemoryStream())  //создаем временный поток для айпи
@@ -43,17 +44,18 @@ namespace WindowsFormsApp1
                        */
 
 
-                        udpSendSignal.Send(signal_host, signal_host.Length);//отправляем host
+                        udpSendSignal.Send(signal_host, signal_host.Length);//отправляем свой host
                         Thread.Sleep(100);//если убрать эту задержку, то не все UDP пакеты приходят из-за высокой скорости отправки.
 
                         //можно попробовать прервать, если зависнет на двух компьютерах 
-                        break;
+                        //break;
 
                         /* //порт можно не передавать
                         udpSendSignal.Send(signal_port, signal_port.Length);//отправляем host
                         Thread.Sleep(10);//если убрать эту задержку, то не все UDP пакеты приходит, почему - хз [2]
                         */
                     }
+                k = k + 1;
                 }
 
         }

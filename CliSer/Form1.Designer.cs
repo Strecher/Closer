@@ -34,18 +34,21 @@
             // hostname
             // 
             this.hostname.AutoSize = true;
-            this.hostname.Location = new System.Drawing.Point(563, 9);
+            this.hostname.Location = new System.Drawing.Point(751, 11);
+            this.hostname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.hostname.Name = "hostname";
-            this.hostname.Size = new System.Drawing.Size(53, 13);
+            this.hostname.Size = new System.Drawing.Size(70, 17);
             this.hostname.TabIndex = 0;
             this.hostname.Text = "hostname";
+            this.hostname.Click += new System.EventHandler(this.hostname_Click);
             // 
             // ClientForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(628, 447);
+            this.ClientSize = new System.Drawing.Size(837, 550);
             this.Controls.Add(this.hostname);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ClientForm";
             this.Text = "Form1";
             this.ResumeLayout(false);
