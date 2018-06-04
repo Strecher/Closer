@@ -28,8 +28,8 @@ namespace WindowsFormsApp1
             var screenshot = Graphics.FromImage(screenshotBitmap);
 
             //создаём переменную для получения айпи
-            string receivedIp = "0";
-            hostname.Text = receivedIp;
+            /*string receivedip = "0";
+            hostname.text = receivedip;*/
 
             //создаем PictureBox для отображения скриншотов
             var screenshotZone = new PictureBox { Parent = this, Dock = DockStyle.Fill, SizeMode = PictureBoxSizeMode.Zoom, Image = screenshotBitmap };
@@ -38,13 +38,13 @@ namespace WindowsFormsApp1
             var Server = new Server();
 
             //сервер посылает сигнал:
-            Server.SendSignal("localhost",24432);
+            Server.SendSignal("192.168.1.12", 24432);
 
             //определяем клиент
-            var tempClient = new Client();
+            //var tempClient = new Client();
 
             //Клиенту создаем поток для получения сигнала
-            ThreadPool.QueueUserWorkItem(
+            /*ThreadPool.QueueUserWorkItem(
             delegate
             {
                 //Клиент получает сигнал от сервера
@@ -54,10 +54,10 @@ namespace WindowsFormsApp1
                     hostname.Text = receivedIp;
                 }
                 // сигнал получен и записан!
-            });
+            }); 
 
             //создаем поток для клиента (на самом деле это должно запускаться на машине клиента, но для теста, клиент запускается здесь)
-            ThreadPool.QueueUserWorkItem(delegate { new Client(receivedIp, 24432).Start(); });
+            ThreadPool.QueueUserWorkItem(delegate { new Client(receivedIp, 24432).Start(); }); */
 
             //создаем поток для сервера
             ThreadPool.QueueUserWorkItem(

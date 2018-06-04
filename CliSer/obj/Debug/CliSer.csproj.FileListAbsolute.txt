@@ -19,3 +19,14 @@ C:\Users\whtl\OneDrive\Documents\Visual Studio 2017\Projects\CliSer\CliSer\obj\D
 C:\Users\whtl\OneDrive\Documents\Visual Studio 2017\Projects\CliSer\CliSer\obj\Debug\CliSer.csproj.CoreCompileInputs.cache
 C:\Users\whtl\OneDrive\Documents\Visual Studio 2017\Projects\CliSer\CliSer\obj\Debug\CliSer.exe
 C:\Users\whtl\OneDrive\Documents\Visual Studio 2017\Projects\CliSer\CliSer\obj\Debug\CliSer.pdb
+D:\Files\Closer\Closer\CliSer\bin\Debug\CliSer.exe.config
+D:\Files\Closer\Closer\CliSer\bin\Debug\CliSer.exe
+D:\Files\Closer\Closer\CliSer\bin\Debug\CliSer.pdb
+D:\Files\Closer\Closer\CliSer\obj\Debug\CliSer.csprojAssemblyReference.cache
+D:\Files\Closer\Closer\CliSer\obj\Debug\WindowsFormsApp1.ClientForm.resources
+D:\Files\Closer\Closer\CliSer\obj\Debug\WindowsFormsApp1.Main.resources
+D:\Files\Closer\Closer\CliSer\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+D:\Files\Closer\Closer\CliSer\obj\Debug\CliSer.csproj.GenerateResource.cache
+D:\Files\Closer\Closer\CliSer\obj\Debug\CliSer.csproj.CoreCompileInputs.cache
+D:\Files\Closer\Closer\CliSer\obj\Debug\CliSer.exe
+D:\Files\Closer\Closer\CliSer\obj\Debug\CliSer.pdb

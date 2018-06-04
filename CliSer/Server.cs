@@ -19,7 +19,7 @@ namespace WindowsFormsApp1
     public class Server
     {
         // в методе идёт передача сигнала для включения потока TCP на клиенте
-        public void SendSignal(string host = "localhost", int port = 24432)
+        public void SendSignal(string host = "192.168.1.12", int port = 24432)
 
  
         {
