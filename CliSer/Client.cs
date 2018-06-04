@@ -159,7 +159,6 @@ namespace WindowsFormsApp1
                     {
                         //вписываем в переменную входящую айпишку
                         receivedIp = Encoding.UTF8.GetString(memoryStreamReceive.GetBuffer());
-                       
                         //возвращаем
                         yield return receivedIp;
 

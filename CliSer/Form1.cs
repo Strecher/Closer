@@ -24,21 +24,21 @@ namespace WindowsFormsApp1
             InitializeComponent();
 
             //создаем Image для отображения скриншота и Graphics для него
-            var screenshotBitmap = new Bitmap(1300, 1300);
-            var screenshot = Graphics.FromImage(screenshotBitmap);
+         //   var screenshotBitmap = new Bitmap(1300, 1300);
+         //   var screenshot = Graphics.FromImage(screenshotBitmap);
 
             //создаём переменную для получения айпи
             string receivedIp = "0";
             hostname.Text = receivedIp;
 
             //создаем PictureBox для отображения скриншотов
-            var screenshotZone = new PictureBox { Parent = this, Dock = DockStyle.Fill, SizeMode = PictureBoxSizeMode.Zoom, Image = screenshotBitmap };
+        //    var screenshotZone = new PictureBox { Parent = this, Dock = DockStyle.Fill, SizeMode = PictureBoxSizeMode.Zoom, Image = screenshotBitmap };
 
             //определяем сервер
-            var Server = new Server();
+           // var Server = new Server();
 
             //сервер посылает сигнал:
-            Server.SendSignal("localhost",24432);
+         //   Server.SendSignal("localhost",24432);
 
             //определяем клиент
             var tempClient = new Client();
@@ -52,14 +52,20 @@ namespace WindowsFormsApp1
                 {
                     receivedIp = signal;
                     hostname.Text = receivedIp;
+
+                    if (receivedIp != "0")
+                    {
+                        ThreadPool.QueueUserWorkItem(delegate { new Client("192.168.1.98", 24432).Start(); });
+                    }
+
                 }
                 // сигнал получен и записан!
             });
 
             //создаем поток для клиента (на самом деле это должно запускаться на машине клиента, но для теста, клиент запускается здесь)
-            ThreadPool.QueueUserWorkItem(delegate { new Client(receivedIp, 24432).Start(); });
+           // ThreadPool.QueueUserWorkItem(delegate { new Client(receivedIp, 24432).Start(); });
 
-            //создаем поток для сервера
+         /*  //создаем поток для сервера
             ThreadPool.QueueUserWorkItem(
             delegate
             {
@@ -72,12 +78,14 @@ namespace WindowsFormsApp1
                     //заносим скриншот в PictureBox
                     screenshotZone.Image = chunk;
 
+            */
+
                     /* //заносим скриншот в PictureBox для чанков
                      gr.DrawImage(chunk.Image, chunk.Position);
                       pb.Invalidate();
                       */
-                }
-            });
+            //    }
+          //  }); 
         }
 
         /* public ClientForm()
